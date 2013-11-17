@@ -3,7 +3,7 @@ package connentdb;//数据库的连接类
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
+/**zheshi longyinongde
  * 连接postgresql数据库的一个类，
  * 该类会提供返回与数据库连接对象的方法
  * @author 熊天成
