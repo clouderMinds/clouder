@@ -6,5 +6,5 @@ package hxiong.usermanager.test;
  *
  */
 public class TestClass {
-
+   
 }
