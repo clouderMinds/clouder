@@ -22,7 +22,11 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
-
+/**
+ * 
+ * @author xiaoWei
+ *
+ */
 public class FileTreePanel extends JPanel{
 	private MyFileNode rootNode;
 	private DefaultTreeModel model;
