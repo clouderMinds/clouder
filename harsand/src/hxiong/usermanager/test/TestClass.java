@@ -1,6 +1,6 @@
 package hxiong.usermanager.test;
 
-import hxiong.dbmanager.psql.ConnectPSQL;
+import hxiong.fsmanager.upload.Uoloader;
 
 /**
  * 这是一个测试类，负责测试写的一些类是否可用
@@ -10,7 +10,8 @@ import hxiong.dbmanager.psql.ConnectPSQL;
 public class TestClass {
 	//主函数入口
     public static void main(String args[]){
-    	ConnectPSQL.getDBConn();
-    	
+    	Uoloader load=new Uoloader();
+    	String type=load.getFtype("hadoop/xiong/haode.ffff");
+    	System.out.println(type);
     }
 }
