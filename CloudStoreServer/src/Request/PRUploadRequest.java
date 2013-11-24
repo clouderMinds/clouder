@@ -2,7 +2,7 @@ package Request;
 
 /**
  * 上传的请求文件验证是否存在类
- * @author LONG
+ * @author wojiaolongyinong
  *
  */
 public class PRUploadRequest extends Request{

@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * 文件视图响应
- * @author LONG
+ * @author wojiaolongyinong
  *
  */
 public class FileViewResponse extends Response{

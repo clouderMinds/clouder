@@ -1,24 +1,23 @@
-package Server;
+package Client;
 
 import org.apache.mina.core.service.IoHandler;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 
 /**
- * 处理客户端消息
+ * 用来对客户端进行测试
+ * 用来主要进行消息接受和发送
  * @author wojiaolongyinong
  *
  */
-public class ServerHandler implements IoHandler{
-	
+public class ClientHandler implements IoHandler{
+
 	public void sessionCreated(IoSession session) throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+
 	public void sessionOpened(IoSession session) throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -26,27 +25,24 @@ public class ServerHandler implements IoHandler{
 		
 	}
 
-	@Override
 	public void sessionIdle(IoSession session, IdleStatus status)
 			throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void exceptionCaught(IoSession session, Throwable cause)
 			throws Exception {
 		
 	}
 
-	@Override
+
 	public void messageReceived(IoSession session, Object message)
 			throws Exception {
-		System.out.println("我是服务器Handler，我在处理消息：" + message.getClass().getSimpleName());
+		System.out.println("我是客户端的Hadler，收到消息：" + message.getClass().getSimpleName());
 	}
+
 
 	public void messageSent(IoSession session, Object message) throws Exception {
 		
 	}
-
 }

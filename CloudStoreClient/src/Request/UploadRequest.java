@@ -1,8 +1,9 @@
 package Request;
+
 /**
  * 当文件在服务器不存在时，上传文件
  * 上传文件的请求类
- * @author LONG
+ * @author wojiaolongyinong
  *
  */
 public class UploadRequest extends Request{

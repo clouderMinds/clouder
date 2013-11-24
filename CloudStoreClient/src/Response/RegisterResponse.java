@@ -1,7 +1,8 @@
 package Response;
+
 /**
- *	响应注册对象
- * @author LONG
+ * 响应注册对象
+ * @author wojiaolongyinong
  *
  */
 public class RegisterResponse extends Response{

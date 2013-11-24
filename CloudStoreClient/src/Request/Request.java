@@ -1,7 +1,8 @@
 package Request;
+
 /**
  * 所有请求的父类
- * @author LONG
+ * @author wojiaolongyinong
  *
  */
 public abstract class Request {

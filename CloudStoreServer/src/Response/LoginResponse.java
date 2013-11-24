@@ -1,7 +1,8 @@
 package Response;
+
 /**
  * 登陆响应对象
- * @author LONG
+ * @author wojiaolongyinong
  *
  */
 public class LoginResponse extends Response{

@@ -2,7 +2,7 @@ package Request;
 
 /**
  * 下载请求类
- * @author LONG
+ * @author wojiaolongyinong
  *
  */
 public class DownloadRequest extends Request{

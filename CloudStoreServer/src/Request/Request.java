@@ -1,17 +1,18 @@
 package Request;
+
 /**
  * 所有请求的父类
- * @author LONG
+ * @author wojiaolongyinong
  *
  */
 public abstract class Request {
 	/**
-	 * 发送者的帐号
+	 * 帐号
 	 */
 	private String ID;
 	
 	/**
-	 * 获取发送者的帐号
+	 * 获取帐号
 	 * @return
 	 */
 	public String getID() {
@@ -19,7 +20,7 @@ public abstract class Request {
 	}
 	
 	/**
-	 * 设置发送者帐号
+	 * 设置帐号
 	 * @param iD
 	 */
 	public void setID(String iD) {

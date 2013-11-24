@@ -1,5 +1,10 @@
 package Response;
 
+/**
+ * 下载文件响应对象
+ * @author wojiaolongyinong
+ *
+ */
 public class DownloadResponse extends Response{
 	/**
 	 * 返回文件的数据

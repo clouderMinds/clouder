@@ -1,7 +1,8 @@
 package Response;
+
 /**
  * 响应上传前的检查，返回返回文件是否存在
- * @author LONG
+ * @author wojiaolongyinong
  *
  */
 public class PreUploadResponse extends Response{

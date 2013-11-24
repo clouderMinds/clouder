@@ -1,7 +1,8 @@
 package Request;
+
 /**
  * 重命名请求类
- * @author LONG
+ * @author wojiaolongyinong
  *
  */
 public class RenameRequest extends Request{

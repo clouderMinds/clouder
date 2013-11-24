@@ -1,7 +1,8 @@
 package Request;
+
 /**
  * 创建新文件夹请求类
- * @author LONG
+ * @author wojiaolongyinong
  *
  */
 public class CreateDirRequest extends Request{

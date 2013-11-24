@@ -1,7 +1,8 @@
 package Request;
+
 /**
  * 删除请求类
- * @author LONG
+ * @author wojiaolongyinong
  *
  */
 public class DeleteRequest extends Request{

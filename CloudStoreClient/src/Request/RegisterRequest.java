@@ -2,7 +2,7 @@ package Request;
 
 /**
  * 注册请求数据包类
- * @author LONG
+ * @author wojiaolongyinong
  *
  */
 public class RegisterRequest extends Request{

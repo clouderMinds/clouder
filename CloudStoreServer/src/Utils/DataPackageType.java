@@ -1,7 +1,8 @@
 package Utils;
+
 /**
  * 用于存放所有数据包的标示
- * @author LONG
+ * @author wojiaolongyinong
  *
  */
 public interface DataPackageType {

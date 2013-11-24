@@ -1,7 +1,8 @@
 package Request;
+
 /**
  * 移动文件请求类
- * @author LONG
+ * @author wojiaolongyinong
  *
  */
 public class MovingRequest extends Request{

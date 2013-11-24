@@ -1,7 +1,8 @@
 package Request;
+
 /**
  * 登陆请求类
- * @author LONG
+ * @author wojiaolongyinong
  *
  */
 public class LoginRequest extends Request{
