@@ -12,7 +12,9 @@ import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 import Codec.CodecFactory;
 import Request.CreateDirRequest;
 import Request.RegisterRequest;
+import Response.DownloadResponse;
 import Response.LoginResponse;
+import Utils.FileSendTest;
 
 public class ServerHandler implements IoHandler{
 	
@@ -20,7 +22,7 @@ public class ServerHandler implements IoHandler{
 		NioSocketAcceptor acceptor = new NioSocketAcceptor();
 //		acceptor.addListener();
 		acceptor.setHandler(this);
-		acceptor.getSessionConfig().setReadBufferSize(2048);
+//		acceptor.getSessionConfig().setReadBufferSize(2048);
 		acceptor.getFilterChain().addLast("Codec", new ProtocolCodecFilter(new CodecFactory()));
 		acceptor.bind(new InetSocketAddress(9090));
 		System.out.println("服务器已经启动！");
@@ -72,15 +74,9 @@ public class ServerHandler implements IoHandler{
 	@Override
 	public void messageReceived(IoSession session, Object message)
 			throws Exception {
-		if(message.getClass().getSimpleName().equals(Utils.DataPackageType.REGISTER_S)){
-			RegisterRequest rr = (RegisterRequest)message;
-			System.out.println(rr.getID() + "  " + rr.getPassword());
-		}else if(message.getClass().getSimpleName().equals(Utils.DataPackageType.CREATEDIR_S)){
-			CreateDirRequest cdr = (CreateDirRequest)message;
-			System.out.println(cdr.getID() + "  " + cdr.getAbsPath());
-		}
-		LoginResponse lr = new LoginResponse("hello world", (byte)0);
-		session.write(lr);
+		System.out.println("我是服务器Handler，我在处理消息：" + message.getClass().getSimpleName());
+		DownloadResponse dr = new DownloadResponse("longyinong", FileSendTest.getData());
+		session.write(dr);
 	}
 
 	public void messageSent(IoSession session, Object message) throws Exception {

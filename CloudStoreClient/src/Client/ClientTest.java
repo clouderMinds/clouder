@@ -13,8 +13,10 @@ import org.apache.mina.transport.socket.nio.NioSocketConnector;
 import Codec.CodecFactory;
 import Request.CreateDirRequest;
 import Request.DeleteRequest;
-import Request.LoginRequest;
+import Request.DownloadRequest;
 import Request.RegisterRequest;
+import Response.DownloadResponse;
+import Utils.FileTools;
 
 /**
  * 用来对客户端进行测试
@@ -71,7 +73,11 @@ public class ClientTest implements IoHandler{
 	@Override
 	public void messageReceived(IoSession session, Object message)
 			throws Exception {
-		System.out.println("收到一条消息！--------！");
+		System.out.println("我是客户端的Hadler，收到消息：" + message.getClass().getSimpleName());
+		if(message.getClass().getSimpleName().equals(Utils.DataPackageType.RE_DOWNLOAD_S)){
+			DownloadResponse dr = (DownloadResponse)message;
+			FileTools.getFile(dr.getData());
+		}
 	}
 
 	@Override
@@ -82,19 +88,23 @@ public class ClientTest implements IoHandler{
 	
 	public static void main(String[] args) throws InterruptedException{
 		ClientTest c = new ClientTest();
+		System.out.println("客户端已经启动，准备5秒后给服务器发送消息......");
 		TimeUnit.SECONDS.sleep(5);
-		for(int i = 0; i < 10; i++){
-			RegisterRequest rr = new RegisterRequest("龙亦浓", "dhuawud"+"-"+i);
+		System.out.println("先不间断发送50条注册请求......");
+		for(int i = 0; i < 50; i++){
+			RegisterRequest rr = new RegisterRequest(""+i, "w h y are you!");
 			c.session.write(rr);
 		}
-		for(int i = 10; i < 20; i++){
-			LoginRequest lr = new LoginRequest("dawdaw", "dawdwa"+i);
-			c.session.write(lr);
-		}
-		CreateDirRequest cdr = new CreateDirRequest("我叫龙益农", "dwadawdnja");
+		System.out.println("然后1秒钟后以间断式，每隔1ms发送一条请求，来进行测试......");
+		TimeUnit.SECONDS.sleep(1);
+		CreateDirRequest cdr = new CreateDirRequest("wojiao", "/home/hadoop/桌面/test");
 		c.session.write(cdr);
-		DeleteRequest dr = new DeleteRequest("dawd", "dawdwad");
+		TimeUnit.MILLISECONDS.sleep(1);
+		DeleteRequest dr = new DeleteRequest("long", "测试删除请求的消息");
 		c.session.write(dr);
+		TimeUnit.MILLISECONDS.sleep(1);
+		DownloadRequest dlr = new DownloadRequest("yi", "测试下载的请求消息！");
+		c.session.write(dlr);
 	}
 	
 }

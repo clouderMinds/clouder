@@ -17,7 +17,9 @@ import Response.RegisterResponse;
  *
  */
 public class GetResponseByte {
-	private static final int HEAD_SIZE = 9;
+	private static final int MSG_TYPE = 1;
+	private static final int MSG_LENGTH = 4;
+	private static final int ID_LENGTH = 4;
 	private static final int DATA_SIZE = 4;
 	
 	/**
@@ -35,9 +37,10 @@ public class GetResponseByte {
 		//写入数据包类型
 		dos.writeByte(Utils.DataPackageType.RE_DOWNLOAD);
 		//写入数据包总大小
-		dos.writeInt(HEAD_SIZE + id_data.length
+		dos.writeInt(MSG_TYPE + MSG_LENGTH + ID_LENGTH + id_data.length
 				+ DATA_SIZE + data.length);
 		//写入接收者帐号
+		dos.writeInt(id_data.length);
 		dos.write(id_data);
 		//依次写入数据的大小以及数据内容
 		dos.writeInt(data.length);
@@ -73,9 +76,10 @@ public class GetResponseByte {
 		//写入数据包类型
 		dos.writeByte(type);
 		//写入数据包的总大小
-		dos.writeInt(HEAD_SIZE + id_data.length
+		dos.writeInt(MSG_TYPE + MSG_LENGTH + ID_LENGTH + id_data.length
 				+ DATA_SIZE + fileView_size);
 		//写入帐号
+		dos.writeInt(id_data.length);
 		dos.write(id_data);
 		//依次写处数据大小及数据
 		dos.writeInt(fileView_size);
@@ -98,9 +102,10 @@ public class GetResponseByte {
 		//写入响应类型
 		dos.writeByte(Utils.DataPackageType.RE_LOGIN);
 		//写入数据包总大小
-		dos.writeInt(HEAD_SIZE + id_data.length
+		dos.writeInt(MSG_TYPE + MSG_LENGTH + ID_LENGTH + id_data.length
 				+ DATA_SIZE + 1);
 		//写入帐号
+		dos.writeInt(id_data.length);
 		dos.write(id_data);
 		//依次写入数据大小及数据
 		dos.writeInt(1);
@@ -123,9 +128,10 @@ public class GetResponseByte {
 		//写入响应类型
 		dos.writeByte(Utils.DataPackageType.RE_PR_UPLOAD);
 		//写入数据包总大小
-		dos.writeInt(HEAD_SIZE + id_data.length
+		dos.writeInt(MSG_TYPE + MSG_LENGTH + ID_LENGTH + id_data.length
 				+ DATA_SIZE + 1);
 		//写入帐号
+		dos.writeInt(id_data.length);
 		dos.write(id_data);
 		//依次写入数据大小及数据
 		dos.writeInt(1);
@@ -148,9 +154,10 @@ public class GetResponseByte {
 		//写入响应类型
 		dos.writeByte(Utils.DataPackageType.RE_REGISTER);
 		//写入数据包总大小
-		dos.writeInt(HEAD_SIZE + id_data.length
+		dos.writeInt(MSG_TYPE + MSG_LENGTH + ID_LENGTH + id_data.length
 				+ DATA_SIZE + 1);
 		//写入帐号
+		dos.writeInt(id_data.length);
 		dos.write(id_data);
 		//依次写入数据大小及数据
 		dos.writeInt(1);

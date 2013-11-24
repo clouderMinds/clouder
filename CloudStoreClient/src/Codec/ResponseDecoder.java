@@ -22,13 +22,11 @@ public class ResponseDecoder extends CumulativeProtocolDecoder{
 			ProtocolDecoderOutput out) throws Exception {
 		//代表一个类型的大小以及表示数据包的总大小
 		if(in.remaining() > 1){
-			System.out.println(in.remaining());
 			byte type = in.get();
 			int size = in.getInt();
 			//数据包的剩余数据量
 			byte[] data = new byte[size - 1 - 4];
 			in.get(data);
-			System.out.println("接收到消息的类型是：" + type);
 			switch(type){
 			case Utils.DataPackageType.RE_REGISTER:
 				RegisterResponse rr = GetResponseObject.getRegisterRe(data);
