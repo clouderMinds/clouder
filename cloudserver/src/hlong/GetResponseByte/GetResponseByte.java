@@ -10,6 +10,7 @@ import hlong.Response.FileViewResponse;
 import hlong.Response.LoginResponse;
 import hlong.Response.PreUploadResponse;
 import hlong.Response.RegisterResponse;
+import hlong.Response.SimpleResponse;
 
 /**
  * 服务器端的工具类，将响应数据包转化为byte数据
@@ -163,5 +164,19 @@ public class GetResponseByte {
 		dos.writeInt(1);
 		dos.writeByte(state);
 		return baos.toByteArray();
+	}
+	
+	/**
+	 * 将传进来的SimpleResponse对象打包成byte数组返回
+	 * @param sr	SimpleResponse对象
+	 * @return		打包好的byte[]数组
+	 */
+	public static byte[] getSimpleResponse(SimpleResponse sr){
+		String id = sr.getID();
+		byte state = sr.getState();
+		byte[] id_data = id.getBytes();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		DataOutputStream dos = new DataOutputStream(baos);
+		
 	}
 }
