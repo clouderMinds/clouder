@@ -3,8 +3,6 @@ package hlong.Client;
 import hlong.Codec.CodecFactory;
 
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-
 import org.apache.mina.core.future.ConnectFuture;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
@@ -48,10 +46,4 @@ public class Client {
 	public void sentMsg(Object msg){
 		session.write(msg);
 	}
-//	
-//	public static void main(String[] args){
-//		getClient();
-//		Log.println("客户端启动起来！");
-//		session.write(new RegisterRequest("374673647@163.com", "dhwadh"));
-//	}
 }

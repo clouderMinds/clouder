@@ -43,7 +43,9 @@ public class ServerHandler implements IoHandler{
 		
 	}
 
-	@Override
+	/**
+	 * 接受到客户端消息调用
+	 */
 	public void messageReceived(IoSession session, Object message)
 			throws Exception {
 		//HdfsuserPSQL.add
@@ -55,7 +57,6 @@ public class ServerHandler implements IoHandler{
 		}else{
 			session.write(new RegisterResponse(rr.getID(),RegisterResponse.IDEXIST));
 		}
-		
 	}
 
 	public void messageSent(IoSession session, Object message) throws Exception {
