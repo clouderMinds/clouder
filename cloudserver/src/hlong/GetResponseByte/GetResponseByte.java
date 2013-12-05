@@ -170,13 +170,28 @@ public class GetResponseByte {
 	 * 将传进来的SimpleResponse对象打包成byte数组返回
 	 * @param sr	SimpleResponse对象
 	 * @return		打包好的byte[]数组
+	 * @throws IOException 
 	 */
-	public static byte[] getSimpleResponse(SimpleResponse sr){
+	public static byte[] getSimpleResponse(SimpleResponse sr) throws IOException{
 		String id = sr.getID();
 		byte state = sr.getState();
+		byte type = sr.getType();
 		byte[] id_data = id.getBytes();
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		DataOutputStream dos = new DataOutputStream(baos);
-		
+		//写入响应类型
+		dos.writeByte(hlong.Utils.DataPackageType.SIM_RESPONSE);
+		//写入数据包总大小
+		dos.writeInt(MSG_TYPE + MSG_LENGTH + ID_LENGTH + id.length()
+				+ DATA_SIZE + 1 + DATA_SIZE + 1);
+		//写入帐号
+		dos.writeInt(id_data.length);
+		dos.write(id_data);
+		//依次写入数据大小及数据
+		dos.writeInt(1);
+		dos.writeByte(state);
+		dos.writeInt(1);
+		dos.writeByte(type);
+		return baos.toByteArray();
 	}
 }
