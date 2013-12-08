@@ -11,6 +11,7 @@ import hlong.Response.FileViewResponse;
 import hlong.Response.LoginResponse;
 import hlong.Response.PreUploadResponse;
 import hlong.Response.RegisterResponse;
+import hlong.Response.UploadResponse;
 import hlong.Utils.DataPackageType;
 /**
  * 主要用于对于服务器发送过来的响应进行解码处理，生成响应的响应消息对象
@@ -29,11 +30,11 @@ public class ResponseDecoder extends CumulativeProtocolDecoder{
 			byte[] data = new byte[size - 1 - 4];
 			in.get(data);
 			switch(type){
-			case DataPackageType.RE_REGISTER:
+			case DataPackageType.RE_REGISTER://注册消息
 				RegisterResponse rr = GetResponseObject.getRegisterRe(data);
 				out.write(rr);
 				break;
-			case DataPackageType.RE_LOGIN:
+			case DataPackageType.RE_LOGIN://登录消息
 				LoginResponse lr = GetResponseObject.getLogin(data);
 				out.write(lr);
 				break;
@@ -53,7 +54,7 @@ public class ResponseDecoder extends CumulativeProtocolDecoder{
 				FileViewResponse fvr_move = GetResponseObject.getFileView(data);
 				out.write(fvr_move);
 				break;
-			case DataPackageType.RE_PR_UPLOAD:
+			case DataPackageType.RE_PR_UPLOAD://验证md5值消息
 				PreUploadResponse pur = GetResponseObject.getPreUpload(data);
 				out.write(pur);
 				break;
@@ -62,7 +63,7 @@ public class ResponseDecoder extends CumulativeProtocolDecoder{
 				out.write(fvr_name);
 				break;
 			case DataPackageType.RE_UPLOAD:
-				FileViewResponse fvr_upload = GetResponseObject.getFileView(data);
+				UploadResponse fvr_upload = GetResponseObject.getUpload(data);
 				out.write(fvr_upload);
 				break;
 			}

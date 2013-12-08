@@ -11,6 +11,7 @@ import hlong.Request.DeleteRequest;
 import hlong.Request.DownloadRequest;
 import hlong.Request.LoginRequest;
 import hlong.Request.MovingRequest;
+import hlong.Request.PRUploadRequest;
 import hlong.Request.RegisterRequest;
 import hlong.Request.RenameRequest;
 import hlong.Request.UploadRequest;
@@ -29,11 +30,11 @@ public class RequestEncoder extends ProtocolEncoderAdapter{
 		byte[] data = null;
 		IoBuffer buffer;
 		switch(type){
-		case DataPackageType.REGISTER_S:
+		case DataPackageType.REGISTER_S://客户端发送的注册消息
 			RegisterRequest rr = (RegisterRequest)message;
 			data = GetMessageByte.getRegister(rr);
 			break;
-		case DataPackageType.LOGIN_S:
+		case DataPackageType.LOGIN_S://客户端发送的登录消息
 			LoginRequest lr = (LoginRequest)message;
 			data = GetMessageByte.getLogin(lr);
 			break;
@@ -57,7 +58,11 @@ public class RequestEncoder extends ProtocolEncoderAdapter{
 			RenameRequest rer = (RenameRequest)message;
 			data = GetMessageByte.getRename(rer);
 			break;
-		case DataPackageType.UPLOAD_S:
+		case DataPackageType.PR_UPLOAD_S://客户端发来的上传文件消息
+			PRUploadRequest prur = (PRUploadRequest)message;
+			data = GetMessageByte.getPRUpload(prur);
+			break;
+		case DataPackageType.UPLOAD_S://客户端发来的上传文件消息
 			UploadRequest ur = (UploadRequest)message;
 			data = GetMessageByte.getUpload(ur);
 			break;

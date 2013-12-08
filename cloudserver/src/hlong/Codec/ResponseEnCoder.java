@@ -11,6 +11,7 @@ import hlong.Response.FileViewResponse;
 import hlong.Response.LoginResponse;
 import hlong.Response.PreUploadResponse;
 import hlong.Response.RegisterResponse;
+import hlong.Response.UploadResponse;
 import hlong.Utils.DataPackageType;
 
 /**
@@ -30,28 +31,30 @@ public class ResponseEnCoder extends ProtocolEncoderAdapter{
 		byte[] data = null;
 		IoBuffer buffer;
 		switch(type){
-		case DataPackageType.RE_DOWNLOAD_S://响应下载的数据包
+		case DataPackageType.RE_DOWNLOAD_S:
 			DownloadResponse dr = (DownloadResponse)message;
 			data = GetResponseByte.getDownload(dr);
 			break;
-		case DataPackageType.FILE_VIEW_S://文件视图数据包
+		case DataPackageType.FILE_VIEW_S:
 			FileViewResponse fvr = (FileViewResponse)message;
 			data = GetResponseByte.getFileView(fvr, DataPackageType.FILE_VIEW);
 			break;
-		case DataPackageType.RE_LOGIN_S://响应那个登陆的数据包
+		case DataPackageType.RE_LOGIN_S:
 			LoginResponse lr = (LoginResponse)message;
 			data = GetResponseByte.getLogin(lr);
 			break;
-		case DataPackageType.RE_PR_UPLOAD_S://响应上传检测的数据包
+		case DataPackageType.RE_PR_UPLOAD_S:
 			PreUploadResponse pur = (PreUploadResponse)message;
 			data = GetResponseByte.getPreUpload(pur);
 			break;
-		case DataPackageType.RE_REGISTER_S://响应注册的数据包
+			//DataPackageType
+		case DataPackageType.RE_UPLOAD_S:
+			UploadResponse upl = (UploadResponse)message;
+			data = GetResponseByte.getUpload(upl);
+			break;	
+		case DataPackageType.RE_REGISTER_S:
 			RegisterResponse rr = (RegisterResponse)message;
 			data = GetResponseByte.getRegister(rr);
-			break;
-		case DataPackageType.SIM_RESPONSE_S://响应的简单数据包，可用于多种响应
-			
 			break;
 		}
 		buffer = IoBuffer.allocate(data.length,false);

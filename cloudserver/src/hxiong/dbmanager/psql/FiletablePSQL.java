@@ -101,7 +101,6 @@ public class FiletablePSQL {
 				}
 			} catch (SQLException e) {
 				System.out.println(e.getNextException());
-				e.printStackTrace();
 			}
 		return null;
 	}
@@ -185,6 +184,12 @@ public class FiletablePSQL {
 			}
 		return false;
 	}
+	/**
+	 * 
+	 * @param owner
+	 * @param abspath
+	 * @return
+	 */
 	public static boolean removeFileonDB(String owner,String abspath){
 		 java.sql.Connection connect=ConnectPSQL.getDBConn();//获取驱动
 		 String sql = "delete from file_table where owner=? and abspath=?";//使用sql语句

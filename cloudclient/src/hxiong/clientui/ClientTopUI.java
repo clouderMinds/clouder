@@ -5,7 +5,6 @@ import hxiong.config.ClientuiConfig;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -35,13 +34,14 @@ public class ClientTopUI extends javax.swing.JPanel{
 	private ImageIcon min_on=new ImageIcon(this.getClass().getResource("images/yellow-2.png"));
     private ImageIcon close_out=new ImageIcon(this.getClass().getResource("images/red-1.png"));
     private ImageIcon close_on=new ImageIcon(this.getClass().getResource("images/red-2.png"));
-    private ImageIcon topBg=new ImageIcon(this.getClass().getResource("images/topBg.png"));
+    private ImageIcon topBg=new ImageIcon(this.getClass().getResource("images/topbackground.jpg"));
     //重载构造方法
 	public ClientTopUI(javax.swing.JFrame client_ui){
 	   this.client_ui=client_ui;//获得窗口对象
 	   showClientTopUI();//调用往上面部分的窗体添加组件的方法
 	}
 	protected void paintComponent(Graphics g) {  
+		super.paintComponent(g);
         Image imgBg = topBg.getImage();  
         g.drawImage(imgBg, 0, 0, ClientuiConfig.clientWidth,ClientuiConfig.clientTopHeight, topBg.getImageObserver());  
     }  
@@ -49,7 +49,7 @@ public class ClientTopUI extends javax.swing.JPanel{
 	 * 该方法用来给上部分的面板添加组件以及相关的操作
 	 */
 	private void showClientTopUI(){
-		this.setPreferredSize(new Dimension(ClientuiConfig.clientWidth,ClientuiConfig.clientTopHeight));//设置好高度
+		this.setBounds(0, 0,ClientuiConfig.clientWidth,ClientuiConfig.clientTopHeight);//设置好高度
         this.setLayout(new BorderLayout());//设置为边框布局
 		this.setBackground(Color.lightGray);
 		

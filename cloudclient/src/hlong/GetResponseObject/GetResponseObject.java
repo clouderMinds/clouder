@@ -11,6 +11,7 @@ import hlong.Response.FileViewResponse;
 import hlong.Response.LoginResponse;
 import hlong.Response.PreUploadResponse;
 import hlong.Response.RegisterResponse;
+import hlong.Response.UploadResponse;
 
 /**
  * 该类作为客户端的工具类使用
@@ -106,12 +107,40 @@ public class GetResponseObject {
 		dis.read(id_data);
 		//读出用户账户
 		String id = new String(id_data);
+		int local_length = dis.readInt();
+		byte[] local_data = new byte[local_length];
+		dis.read(local_data);
+		//读取本地文件路径
+		String localPath= new String(local_data);
 		int state_length = dis.readInt();
 		byte[] state_data = new byte[state_length];
 		dis.read(state_data);
-		return new PreUploadResponse(id, state_data[0]);
+		return new PreUploadResponse(id,localPath,state_data[0]);
 	}
-	
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 * @throws IOException
+	 */
+	public static UploadResponse getUpload(byte[] data) throws IOException{
+		DataInputStream dis = getStream(data);
+		//读取用户账户的从大小
+		int id_length = dis.readInt();
+		byte[] id_data = new byte[id_length];
+		dis.read(id_data);
+		//读出用户账户
+		String id = new String(id_data);
+		int local_length = dis.readInt();
+		byte[] local_data = new byte[local_length];
+		dis.read(local_data);
+		//读取本地文件路径
+		String localPath= new String(local_data);
+		int state_length = dis.readInt();
+		byte[] state_data = new byte[state_length];
+		dis.read(state_data);
+		return new UploadResponse(id,localPath,state_data[0]);
+	}
 	/**
 	 * 根据传进来的数据返回下载响应对象
 	 * @param data	byte数据
@@ -124,11 +153,18 @@ public class GetResponseObject {
 		int id_length = dis.readInt();
 		byte[] id_data = new byte[id_length];
 		dis.read(id_data);
+		int local_length = dis.readInt();
+		byte[] local_data = new byte[local_length];
+		dis.read(local_data);
 		//读出用户账户
 		String id = new String(id_data);
+		String localPaht=new String(local_data);
+		int state_length = dis.readInt();
+		byte[] state_data = new byte[state_length];
+		dis.read(state_data);
 		int data_size = dis.readInt();
 		byte[] data_data = new byte[data_size];
 		dis.read(data_data);
-		return new DownloadResponse(id, data_data);
+		return new DownloadResponse(id,localPaht,state_data[0], data_data);
 	}
 }

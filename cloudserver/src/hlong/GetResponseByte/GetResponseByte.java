@@ -10,7 +10,7 @@ import hlong.Response.FileViewResponse;
 import hlong.Response.LoginResponse;
 import hlong.Response.PreUploadResponse;
 import hlong.Response.RegisterResponse;
-import hlong.Response.SimpleResponse;
+import hlong.Response.UploadResponse;
 
 /**
  * 服务器端的工具类，将响应数据包转化为byte数据
@@ -31,18 +31,28 @@ public class GetResponseByte {
 	 */
 	public static byte[] getDownload(DownloadResponse dr) throws IOException{
 		String id = dr.getID();
+		String localPath=dr.getLocalPath();
+		byte state=dr.getState();
 		byte[] data = dr.getData();
 		byte[] id_data = id.getBytes();
+		byte[] local_data=localPath.getBytes();
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		DataOutputStream dos = new DataOutputStream(baos);
 		//写入数据包类型
 		dos.writeByte(hlong.Utils.DataPackageType.RE_DOWNLOAD);
 		//写入数据包总大小
 		dos.writeInt(MSG_TYPE + MSG_LENGTH + ID_LENGTH + id_data.length
-				+ DATA_SIZE + data.length);
+				+DATA_SIZE+local_data.length
+				+ DATA_SIZE + data.length+DATA_SIZE + 1);
 		//写入接收者帐号
 		dos.writeInt(id_data.length);
 		dos.write(id_data);
+		//写入本地文件
+		dos.writeInt(local_data.length);
+		dos.write(local_data);
+		//写入操作状态
+		dos.writeInt(1);
+		dos.writeByte(state);
 		//依次写入数据的大小以及数据内容
 		dos.writeInt(data.length);
 		dos.write(data);
@@ -122,24 +132,56 @@ public class GetResponseByte {
 	 */
 	public static byte[] getPreUpload(PreUploadResponse plr) throws IOException{
 		String id = plr.getID();
+		String local=plr.getLocalPaht();
 		byte state = plr.getState();
 		byte[] id_data = id.getBytes();
+		byte[] local_data=local.getBytes();
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		DataOutputStream dos = new DataOutputStream(baos);
 		//写入响应类型
 		dos.writeByte(hlong.Utils.DataPackageType.RE_PR_UPLOAD);
 		//写入数据包总大小
-		dos.writeInt(MSG_TYPE + MSG_LENGTH + ID_LENGTH + id_data.length
-				+ DATA_SIZE + 1);
-		//写入帐号
+		dos.writeInt(MSG_TYPE + MSG_LENGTH + ID_LENGTH + id_data.length+
+				ID_LENGTH+local_data.length+ DATA_SIZE + 1);
 		dos.writeInt(id_data.length);
+		//写入帐号
 		dos.write(id_data);
 		//依次写入数据大小及数据
+		dos.writeInt(local_data.length);
+		dos.write(local_data);
 		dos.writeInt(1);
 		dos.writeByte(state);
 		return baos.toByteArray();
 	}
-	
+	/**
+	 * 
+	 * @param lr
+	 * @return
+	 * @throws IOException
+	 */
+	public static byte[] getUpload(UploadResponse lr) throws IOException{
+		String id = lr.getID();
+		String local=lr.getLocalPaht();
+		byte state = lr.getState();
+		byte[] id_data = id.getBytes();
+		byte[] local_data=local.getBytes();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		DataOutputStream dos = new DataOutputStream(baos);
+		//写入响应类型
+		dos.writeByte(hlong.Utils.DataPackageType.RE_UPLOAD);
+		//写入数据包总大小
+		dos.writeInt(MSG_TYPE + MSG_LENGTH + ID_LENGTH + id_data.length+
+				ID_LENGTH+local_data.length+ DATA_SIZE + 1);
+		dos.writeInt(id_data.length);
+		//写入帐号
+		dos.write(id_data);
+		//依次写入数据大小及数据
+		dos.writeInt(local_data.length);
+		dos.write(local_data);
+		dos.writeInt(1);
+		dos.writeByte(state);
+		return baos.toByteArray();
+	}
 	/**
 	 * 根据传进来的注册响应对象返回byte数据
 	 * @param rr	注册响应对象
@@ -163,35 +205,6 @@ public class GetResponseByte {
 		//依次写入数据大小及数据
 		dos.writeInt(1);
 		dos.writeByte(state);
-		return baos.toByteArray();
-	}
-	
-	/**
-	 * 将传进来的SimpleResponse对象打包成byte数组返回
-	 * @param sr	SimpleResponse对象
-	 * @return		打包好的byte[]数组
-	 * @throws IOException 
-	 */
-	public static byte[] getSimpleResponse(SimpleResponse sr) throws IOException{
-		String id = sr.getID();
-		byte state = sr.getState();
-		byte type = sr.getType();
-		byte[] id_data = id.getBytes();
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		DataOutputStream dos = new DataOutputStream(baos);
-		//写入响应类型
-		dos.writeByte(hlong.Utils.DataPackageType.SIM_RESPONSE);
-		//写入数据包总大小
-		dos.writeInt(MSG_TYPE + MSG_LENGTH + ID_LENGTH + id.length()
-				+ DATA_SIZE + 1 + DATA_SIZE + 1);
-		//写入帐号
-		dos.writeInt(id_data.length);
-		dos.write(id_data);
-		//依次写入数据大小及数据
-		dos.writeInt(1);
-		dos.writeByte(state);
-		dos.writeInt(1);
-		dos.writeByte(type);
 		return baos.toByteArray();
 	}
 }

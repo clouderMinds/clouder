@@ -45,7 +45,6 @@ public class ClientHandler implements IoHandler{
 
 	public void messageReceived(IoSession session, Object message)
 			throws Exception {
-		System.out.println("我是客户端的Hadler，收到消息：" + message.getClass().getSimpleName());
 		for(UIMessageListener temp : ar_listener){
 			temp.onMessageReceived(message);
 		}

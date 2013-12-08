@@ -11,7 +11,9 @@ public class UploadRequest extends Request{
 	 * 文件的抽象路径
 	 */
 	private String absPath;
-	
+	//本地文件路径
+	private String localPath;
+		
 	/**
 	 * 文件的MD5值
 	 */
@@ -29,9 +31,10 @@ public class UploadRequest extends Request{
 	 * @param MD5	文件的MD5值
 	 * @param data	文件的具体数据
 	 */
-	public UploadRequest(String ID,String absPath,String MD5, byte[] data){
+	public UploadRequest(String ID,String absPath,String localPath,String MD5, byte[] data){
 		super.setID(ID);
 		this.absPath = absPath;
+		this.localPath=localPath;
 		this.MD5 = MD5;
 		this.data = data;
 	}
@@ -67,7 +70,20 @@ public class UploadRequest extends Request{
 	public void setMD5(String mD5) {
 		MD5 = mD5;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getLocalPaht() {
+		return localPath;
+	}
+	/**
+	 * 
+	 * @param localPaht
+	 */
+	public void setLocalPaht(String localPath) {
+		this.localPath = localPath;
+	}
 	/**
 	 * 返回上传的数据
 	 * @return

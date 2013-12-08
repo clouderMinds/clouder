@@ -169,15 +169,18 @@ public class GetMessageByte {
 	public static byte[] getDownload(DownloadRequest dr) throws IOException{
 		String id = dr.getID();
 		String absPath = dr.getAbsPath();
+		String localPath=dr.getLocalPath();
 		byte[] id_b = id.getBytes();
 		byte[] absPath_b = absPath.getBytes();
+		byte[] localPath_b=localPath.getBytes();
 		ByteArrayOutputStream baos = getStream();
 		DataOutputStream daos = new DataOutputStream(baos);
 		//首先写入数据包类型
 		daos.writeByte(DataPackageType.DOWNLOAD);
 		//写入数据包的总大小
 		daos.writeInt(TYPE_LENGTH + LENGTH_SIZE + ID_LENGTH + id_b.length
-				+ DATA_LENGTH + absPath_b.length);
+				+ DATA_LENGTH + absPath_b.length
+				+DATA_LENGTH+localPath_b.length);
 		//写入发送者的帐号大小
 		daos.writeInt(id_b.length);
 		//写入发送者的帐号
@@ -185,6 +188,8 @@ public class GetMessageByte {
 		//依次写入数据的大小及内容
 		daos.writeInt(absPath_b.length);
 		daos.write(absPath_b);
+		daos.writeInt(localPath_b.length);
+		daos.write(localPath_b);
 		return baos.toByteArray();
 	}
 	
@@ -233,6 +238,7 @@ public class GetMessageByte {
 		String md5 = prur.getMD5();
 		byte[] id_b = id.getBytes();
 		byte[] absPath_b = absPath.getBytes();
+		byte[] local_b=prur.getLocalPaht().getBytes();
 		byte[] md5_b = md5.getBytes();
 		ByteArrayOutputStream baos = getStream();
 		DataOutputStream daos = new DataOutputStream(baos);
@@ -240,7 +246,7 @@ public class GetMessageByte {
 		daos.writeByte(DataPackageType.PR_UPLOAD);
 		//写入数据包的总大小
 		daos.writeInt(TYPE_LENGTH + LENGTH_SIZE + ID_LENGTH + id_b.length
-				+ DATA_LENGTH + absPath_b.length
+				+ DATA_LENGTH + absPath_b.length+DATA_LENGTH+local_b.length
 				+ DATA_LENGTH + md5_b.length);
 		//写入发送者的帐号大小
 		daos.writeInt(id_b.length);
@@ -249,6 +255,8 @@ public class GetMessageByte {
 		//依次写入数据的大小及内容
 		daos.writeInt(absPath_b.length);
 		daos.write(absPath_b);
+		daos.writeInt(local_b.length);
+		daos.write(local_b);
 		daos.writeInt(md5_b.length);
 		daos.write(md5_b);
 		return baos.toByteArray();
@@ -296,10 +304,12 @@ public class GetMessageByte {
 	public static byte[] getUpload(UploadRequest ur) throws IOException{
 		String id = ur.getID();
 		String absPath = ur.getAbsPath();
+		String localPath=ur.getLocalPaht();
 		String md5 = ur.getMD5();
 		byte[] data = ur.getData();
 		byte[] id_b = id.getBytes();
 		byte[] absPath_b = absPath.getBytes();
+		byte[] localPath_b=localPath.getBytes();
 		byte[] md5_b = md5.getBytes();
 		ByteArrayOutputStream baos = getStream();
 		DataOutputStream daos = new DataOutputStream(baos);
@@ -308,6 +318,7 @@ public class GetMessageByte {
 		//写入数据包的总大小
 		daos.writeInt(TYPE_LENGTH + LENGTH_SIZE + ID_LENGTH + id_b.length
 				+ DATA_LENGTH + absPath_b.length
+				+ DATA_LENGTH + localPath_b.length
 				+ DATA_LENGTH + md5_b.length
 				+ DATA_LENGTH + data.length);
 		//写入发送者的帐号大小
@@ -317,6 +328,8 @@ public class GetMessageByte {
 		//依次写入数据的大小及内容
 		daos.writeInt(absPath_b.length);
 		daos.write(absPath_b);
+		daos.writeInt(localPath_b.length);
+		daos.write(localPath_b);
 		daos.writeInt(md5_b.length);
 		daos.write(md5_b);
 		daos.writeInt(data.length);

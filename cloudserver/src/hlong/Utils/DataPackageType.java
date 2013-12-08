@@ -40,7 +40,11 @@ public interface DataPackageType {
 	 */
 	public static final byte UPLOAD = 0x08;
 	public static final String UPLOAD_S = "UploadRequest";
-	
+	/**
+	 * 响应上传的文件
+	 */
+	public static final byte RE_UPLOAD = 0x18;
+	public static final String RE_UPLOAD_S = "UploadResponse";
 	/**
 	 * 上传检测数据包标示
 	 */
@@ -52,12 +56,6 @@ public interface DataPackageType {
 	 */
 	public static final byte RE_PR_UPLOAD = 0x38;
 	public static final String RE_PR_UPLOAD_S = "PreUploadResponse";
-	
-//	/**
-//	 * 响应上传文件
-//	 */
-//	public static final byte RE_UPLOAD = 0x18;
-//	public static final String RE_UPLOAD_S = "FileViewResponse";
 	
 	/**
 	 * 下载文件数据包标示
@@ -77,11 +75,11 @@ public interface DataPackageType {
 	public static final byte DELETE = 0x06;
 	public static final String DELETE_S = "DeleteRequest";
 	
-//	/**
-//	 * 响应删除
-//	 */
-//	public static final byte RE_DELETE = 0x16;
-//	public static final String RE_DELETE_S = "FileViewResponse";
+	/**
+	 * 响应删除
+	 */
+	public static final byte RE_DELETE = 0x16;
+	public static final String RE_DELETE_S = "FileViewResponse";
 	
 	/**
 	 * 移动文件数据包标示
@@ -89,11 +87,11 @@ public interface DataPackageType {
 	public static final byte MOVING = 0x05;
 	public static final String MOVING_S = "MovingRequest";
 	
-//	/**
-//	 * 响应移动
-//	 */
-//	public static final byte RE_MOVING = 0x15;
-//	public static final String RE_MOVING_S = "FileViewResponse";
+	/**
+	 * 响应移动
+	 */
+	public static final byte RE_MOVING = 0x15;
+	public static final String RE_MOVING_S = "FileViewResponse";
 	
 	/**
 	 * 重命名文件数据包的标示
@@ -101,11 +99,11 @@ public interface DataPackageType {
 	public static final byte RENAME = 0x04;
 	public static final String RENAME_S = "RenameRequest";
 	
-//	/**
-//	 * 响应重命名
-//	 */
-//	public static final byte RE_RENAME = 0x14;
-//	public static final String RE_RENAME_S = "FileViewResponse";
+	/**
+	 * 响应重命名
+	 */
+	public static final byte RE_RENAME = 0x14;
+	public static final String RE_RENAME_S = "FileViewResponse";
 	
 	/**
 	 * 创建新文件夹数据包标示
@@ -114,14 +112,8 @@ public interface DataPackageType {
 	public static final String CREATEDIR_S = "CreateDirRequest";
 	
 	/**
-	 * 简单响应数据包标示
+	 * 响应创建新的文件夹
 	 */
-	public static final byte SIM_RESPONSE = 0x19;
-	public static final String SIM_RESPONSE_S = "SimpleResponse";
-	
-//	/**
-//	 * 响应创建新的文件夹
-//	 */
-//	public static final byte RE_CREATEDIR = 0x13;
-//	public static final String RE_CREATEDIR_S = "FileViewResponse";
+	public static final byte RE_CREATEDIR = 0x13;
+	public static final String RE_CREATEDIR_S = "FileViewResponse";
 }

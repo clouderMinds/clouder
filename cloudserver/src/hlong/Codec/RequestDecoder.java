@@ -11,6 +11,7 @@ import hlong.Request.DeleteRequest;
 import hlong.Request.DownloadRequest;
 import hlong.Request.LoginRequest;
 import hlong.Request.MovingRequest;
+import hlong.Request.PRUploadRequest;
 import hlong.Request.RegisterRequest;
 import hlong.Request.RenameRequest;
 import hlong.Request.UploadRequest;
@@ -65,6 +66,10 @@ public class RequestDecoder extends CumulativeProtocolDecoder{
 				RenameRequest rer = GetMessage.getRename(data);
 				out.write(rer);
 				break;
+			case hlong.Utils.DataPackageType.PR_UPLOAD://md5验证请求
+				PRUploadRequest prur = GetMessage.getPRUpload(data);
+				out.write(prur);
+				break;	
 			case hlong.Utils.DataPackageType.UPLOAD://上传请求
 				UploadRequest ur = GetMessage.getUpload(data);
 				out.write(ur);

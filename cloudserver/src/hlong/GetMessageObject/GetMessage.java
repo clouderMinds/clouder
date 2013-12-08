@@ -113,9 +113,13 @@ public class GetMessage {
 		int absPath_length = dis.readInt();
 		byte[] absPath_data = new byte[absPath_length];
 		dis.read(absPath_data);
+		int local_length = dis.readInt();
+		byte[] localPath_data = new byte[local_length];
+		dis.read(localPath_data);
 		String id = new String(id_data);
 		String absPath = new String(absPath_data);
-		return new DownloadRequest(id, absPath);
+		String localPath=new String(localPath_data);
+		return new DownloadRequest(id, absPath,localPath);
 	}
 	
 	/**
@@ -183,13 +187,17 @@ public class GetMessage {
 		int absPath_length = dis.readInt();
 		byte[] absPath_data = new byte[absPath_length];
 		dis.read(absPath_data);
+		int local_length = dis.readInt();
+		byte[] local_data = new byte[local_length];
+		dis.read(local_data);
 		int md5_length = dis.readInt();
 		byte[] md5_data = new byte[md5_length];
 		dis.read(md5_data);
 		String id = new String(id_data);
 		String absPath = new String(absPath_data);
+		String localPath=new String(local_data);
 		String md5 = new String(md5_data);
-		return new PRUploadRequest(id, absPath, md5);
+		return new PRUploadRequest(id, absPath,localPath, md5);
 	}
 	
 	/**
@@ -233,6 +241,9 @@ public class GetMessage {
 		int absPath_length = dis.readInt();
 		byte[] absPath_data = new byte[absPath_length];
 		dis.read(absPath_data);
+		int localPath_length = dis.readInt();
+		byte[] localPath_data = new byte[localPath_length];
+		dis.read(localPath_data);
 		int md5_length = dis.readInt();
 		byte[] md5_data = new byte[md5_length];
 		dis.read(md5_data);
@@ -241,7 +252,8 @@ public class GetMessage {
 		dis.read(data_data);
 		String id = new String(id_data);
 		String absPath = new String(absPath_data);
+		String localPath=new String(localPath_data);
 		String md5 = new String(md5_data);
-		return new UploadRequest(id, absPath, md5, data_data);
+		return new UploadRequest(id, absPath, localPath,md5, data_data);
 	}
 }

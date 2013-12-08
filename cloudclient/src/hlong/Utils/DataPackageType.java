@@ -21,6 +21,13 @@ public interface DataPackageType {
 	 * 文件视图标示
 	 */
 	public static final byte FILE_VIEW = 0x09;
+	public static final String FILE_S = "FileViewRequest";
+	
+	/**
+	 * 响应用户获取文件视图
+	 */
+	public static final byte REFILE_VIEW = 0x19;
+	public static final String REFILE_S = "FileViewResponse";
 	
 	/**
 	 * 登陆数据包标示
@@ -39,7 +46,11 @@ public interface DataPackageType {
 	 */
 	public static final byte UPLOAD = 0x08;
 	public static final String UPLOAD_S = "UploadRequest";
-	
+	/**
+	 * 响应上传文件
+	 */
+	public static final byte RE_UPLOAD = 0x18;
+	public static final String RE_UPLOAD_S = "UploadResponse";
 	/**
 	 * 上传检测数据包标示
 	 */
@@ -51,12 +62,6 @@ public interface DataPackageType {
 	 */
 	public static final byte RE_PR_UPLOAD = 0x38;
 	public static final String RE_PR_UPLOAD_S = "PreUploadResponse";
-	
-	/**
-	 * 响应上传文件
-	 */
-	public static final byte RE_UPLOAD = 0x18;
-	public static final String RE_UPLOAD_S = "FileViewResponse";
 	
 	/**
 	 * 下载文件数据包标示
